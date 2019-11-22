@@ -14,8 +14,11 @@ var CookieHandler = {
 			return;
 		}
 		usersRegistered=JSON.parse(usersRegisteredString);
-		if(usersRegisteredString.cookieExpirationDate > new Date()){
-			return usersRegisteredString.CookieValue;
+		if(new Date(usersRegistered.cookieExpirationDate) > new Date()){
+			return usersRegistered.CookieValue;
 		}
+	},
+	DeleteCookie:function(cookieName){
+		localStorage.removeItem(cookieName);
 	}
 }

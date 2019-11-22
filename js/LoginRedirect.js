@@ -6,8 +6,13 @@ var cookie = CookieHandler.GetCookie(loginUserCookie);
 var LogginHandler = {};
 
 var actualLocation = window.location.toString();
-if(cookie == "" && !actualLocation.includes("login.html")){
+
+if(cookie == null && !actualLocation.includes("login.html")){
 	window.location=logginUrl;
+}
+else if(cookie != null && actualLocation.includes("login.html"))
+{
+	window.location="index.html";
 }
 
 Date.prototype.addDays = function(days) {
@@ -58,5 +63,10 @@ $(document).ready(function(){
 		var dateString = date.addDays(1);
 		CookieHandler.SetCookie(loginUserCookie,"true",dateString);
 		window.location="index.html";
+	}
+
+	LogginHandler.LogoutUser=function(username){
+		CookieHandler.DeleteCookie(loginUserCookie);
+		window.location=logginUrl;
 	}
 });
